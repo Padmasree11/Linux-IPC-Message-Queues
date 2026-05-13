@@ -101,7 +101,8 @@ int main()
 ## OUTPUT
 
 
-<img width="748" height="633" alt="Screenshot 2026-05-13 094231" src="https://github.com/user-attachments/assets/b46091a9-5d69-482d-8622-1821eccb829c" />
+<img width="1350" height="1165" alt="WhatsApp Image 2026-05-13 at 9 59 38 PM" src="https://github.com/user-attachments/assets/01740da0-7b76-49ac-a439-60fc072f1743" />
+
 
 
 # RESULT:
