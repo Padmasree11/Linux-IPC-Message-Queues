@@ -21,7 +21,79 @@ Execute the C Program for the desired output.
 # PROGRAM:
 
 ## C program that receives a message from message queue and display them
+RECIEVER 
+```
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <string.h>
 
+// Structure for message
+struct message
+{
+    long msg_type;
+    char text[100];
+};
+
+int main()
+{
+    struct message msg;
+
+    // Generate unique key
+    key_t key = ftok("progfile", 65);
+
+    // Create/Get message queue
+    int msgid = msgget(key, 0666 | IPC_CREAT);
+
+    // Receive message
+    msgrcv(msgid, &msg, sizeof(msg.text), 1, 0);
+
+    // Display message
+    printf("Message Received: %s\n", msg.text);
+
+    // Destroy message queue
+    msgctl(msgid, IPC_RMID, NULL);
+
+    return 0;
+}
+```
+SENDER
+```
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <string.h>
+
+// Structure for message
+struct message
+{
+    long msg_type;
+    char text[100];
+};
+
+int main()
+{
+    struct message msg;
+
+    // Generate unique key
+    key_t key = ftok("progfile", 65);
+
+    // Create/Get message queue
+    int msgid = msgget(key, 0666 | IPC_CREAT);
+
+    msg.msg_type = 1;
+
+    printf("Enter Message: ");
+    fgets(msg.text, sizeof(msg.text), stdin);
+
+    // Send message
+    msgsnd(msgid, &msg, sizeof(msg.text), 0);
+
+    printf("Message Sent: %s\n", msg.text);
+
+    return 0;
+}
+```
 
 
 
@@ -29,6 +101,7 @@ Execute the C Program for the desired output.
 ## OUTPUT
 
 
+<img width="748" height="633" alt="Screenshot 2026-05-13 094231" src="https://github.com/user-attachments/assets/b46091a9-5d69-482d-8622-1821eccb829c" />
 
 
 # RESULT:
